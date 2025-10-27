@@ -9,14 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(ViewsManager.self) var viewsManager
+    var manageLocation: LocationManager
     
     var body: some View {
-        MainAppView()
+        MainAppView(manageLocation: manageLocation)
             .environment(viewsManager)
+            .onAppear {
+                if !manageLocation.userLocation.isAuthorized {
+                    manageLocation.startLocationServices()
+                }
+            }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(manageLocation: LocationManager())
         .environment(ViewsManager())
 }

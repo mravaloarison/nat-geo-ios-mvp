@@ -9,13 +9,14 @@ import SwiftUI
 
 struct MainAppView: View {
     @Environment(ViewsManager.self) var viewManager
+    var manageLocation: LocationManager
     
     var body: some View {
         tabs
             .tabBarMinimizeBehavior(.onScrollDown)
             .tabViewBottomAccessory {
                 if viewManager.displayTabViewBottomAccessory {
-                    UserLocationView()
+                    UserLocationView(manageLocation: manageLocation)
                 }
             }
     }
@@ -38,6 +39,6 @@ struct MainAppView: View {
 }
 
 #Preview {
-    MainAppView()
+    MainAppView(manageLocation: LocationManager())
         .environment(ViewsManager())
 }

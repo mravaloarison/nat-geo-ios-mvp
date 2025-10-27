@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreLocation
+internal import CoreLocation
 
 /// Observation list
 struct ObservedSpecies: Codable {

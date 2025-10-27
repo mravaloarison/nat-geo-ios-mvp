@@ -6,13 +6,37 @@
 //
 
 import SwiftUI
+internal import CoreLocation
 
 struct UserLocationView: View {
+    var manageLocation: LocationManager
+    
     var body: some View {
-        Text("UserLocation")
+        content
+    }
+    
+    var content: some View {
+        HStack {
+            Image(systemName: "iphone.badge.location")
+            location
+            Spacer()
+            Image(systemName: "gearshape.fill")
+        }
+        .padding()
+    }
+    
+    var location: some View {
+        VStack(alignment: .leading) {
+            Text("Device Location")
+                .font(.footnote)
+                .bold()
+            Text(manageLocation.userLocation.displayText ?? "No location detected")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
     }
 }
 
 #Preview {
-    UserLocationView()
+    UserLocationView(manageLocation: LocationManager())
 }
