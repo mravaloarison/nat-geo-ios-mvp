@@ -32,5 +32,7 @@ import Foundation
         )
     ]
     
-    var displayTabViewBottomAccessory: Bool = false
+    var displayTabViewBottomAccessory = false
+    var showListOfObservationsView = false
+    var showFiltersView = false
 }

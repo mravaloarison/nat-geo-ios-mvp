@@ -36,3 +36,21 @@ struct DateUtils {
         }
     }
 }
+
+func formatToDec(_ decimal: Double?) -> String {
+    guard let decimal else { return "" }
+    
+    let absValue = abs(decimal)
+    let sign = decimal < 0 ? "-" : ""
+    
+    switch absValue {
+    case 1_000_000_000...:
+        return "\(sign)\(String(format: "%.1f", absValue / 1_000_000_000))B"
+    case 1_000_000...:
+        return "\(sign)\(String(format: "%.1f", absValue / 1_000_000))M"
+    case 1_000...:
+        return "\(sign)\(String(format: "%.1f", absValue / 1_000))K"
+    default:
+        return NumberFormatter.localizedString(from: NSNumber(value: decimal), number: .decimal)
+    }
+}

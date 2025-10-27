@@ -28,6 +28,7 @@ struct MainAppView: View {
                 Tab(tab.label, systemImage: tab.icon) {
                     tab.view
                         .environment(viewManager)
+                        .environment(manageLocation)
                 }
             }
             
