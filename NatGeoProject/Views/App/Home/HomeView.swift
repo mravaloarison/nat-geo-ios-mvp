@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(ViewsManager.self) var viewManager
+
     var body: some View {
         Text("Home View")
+            .onAppear {
+                viewManager.displayTabViewBottomAccessory = false
+            }
     }
 }
 
 #Preview {
     HomeView()
+        .environment(ViewsManager())
 }

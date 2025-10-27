@@ -1,5 +1,5 @@
 //
-//  ExploreView.swift
+//  ChallengesView.swift
 //  NatGeoProject
 //
 //  Created by Mami RavaLoarison on 10/27/25.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct ExploreView: View {
+struct ChallengesView: View {
     @Environment(ViewsManager.self) var viewManager
 
     var body: some View {
-        Text("Explore View")
+        Text("Challenges View")
             .onAppear {
-                viewManager.displayTabViewBottomAccessory = true
+                viewManager.displayTabViewBottomAccessory = false
             }
     }
 }
 
 #Preview {
-    ExploreView()
+    ChallengesView()
         .environment(ViewsManager())
 }

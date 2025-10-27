@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Environment(ViewsManager.self) var viewManager
+
     var body: some View {
         Text("Search View")
+            .onAppear {
+                viewManager.displayTabViewBottomAccessory = true
+            }
     }
 }
 
 #Preview {
     SearchView()
+        .environment(ViewsManager())
 }

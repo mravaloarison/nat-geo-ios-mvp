@@ -5,4 +5,10 @@
 //  Created by Mami RavaLoarison on 10/27/25.
 //
 
-import Foundation
+import SwiftUI
+
+struct TabItem {
+    let icon: String
+    let label: String
+    let view: AnyView
+}

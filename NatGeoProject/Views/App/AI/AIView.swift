@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct AIView: View {
+    @Environment(ViewsManager.self) var viewManager
+
     var body: some View {
         Text("AI View")
+            .onAppear {
+                viewManager.displayTabViewBottomAccessory = false
+            }
     }
 }
 
 #Preview {
     AIView()
+        .environment(ViewsManager())
 }
