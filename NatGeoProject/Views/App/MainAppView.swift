@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainAppView: View {
     @Environment(ViewsManager.self) var viewManager
+    @State var searchManager = SearchManager()
     var manageLocation: LocationManager
     
     var body: some View {
@@ -31,7 +32,7 @@ struct MainAppView: View {
             }
             
             Tab(role: .search) {
-                SearchView()
+                SearchView(searchManager: $searchManager)
                     .environment(viewManager)
             }
         }

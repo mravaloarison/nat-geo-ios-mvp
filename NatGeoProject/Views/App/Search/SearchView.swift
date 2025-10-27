@@ -9,16 +9,38 @@ import SwiftUI
 
 struct SearchView: View {
     @Environment(ViewsManager.self) var viewManager
-
+    @Binding var searchManager: SearchManager
+    
     var body: some View {
-        Text("Search View")
-            .onAppear {
-                viewManager.displayTabViewBottomAccessory = true
+        NavigationStack {
+            HeaderLayout(tab: "Search")
+                .padding(.horizontal)
+            listOfResults
+            .listStyle(.inset)
+            .searchable(
+                text: $searchManager.speciesSearchField,
+                prompt: "Look for species"
+            )
+        }
+        .onAppear {
+            viewManager.displayTabViewBottomAccessory = true
+        }
+    }
+    
+    var listOfResults: some View {
+        Group {
+            List(0..<searchManager.searchResults.count, id: \.self) { index in
+                NavigationLink {
+                    Text("Itme \(index + 1)")
+                } label: {
+                    ResultListView(taxon: searchManager.searchResults[index])
+                }
             }
+        }
     }
 }
 
 #Preview {
-    SearchView()
+    SearchView(searchManager: .constant(SearchManager()))
         .environment(ViewsManager())
 }
