@@ -11,10 +11,10 @@ import CoreLocation
 /// Observation list
 struct ObservedSpecies: Codable {
     let total_results: Double
-    let results: [Observation]
+    let results: [ObservationResult]
 }
 
-struct Observation: Codable {
+struct ObservationResult: Codable {
     let species_guess: String?
     let taxon: Taxon?
     let user: Observer?
