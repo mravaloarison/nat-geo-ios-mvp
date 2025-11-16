@@ -8,7 +8,7 @@
 import Foundation
 internal import CoreLocation
 
-/// Observation list
+// MARK: - List Of Observations Response
 struct ObservedSpecies: Codable {
     let total_results: Double
     let results: [ObservationResult]
@@ -21,6 +21,7 @@ struct ObservationResult: Codable {
     let geojson: ObservationCoordinate?
     let location: String?
     let time_observed_at: String?
+    let id: Int?
     
     var resolvedAddress: String?
 
@@ -58,6 +59,7 @@ struct ObservationResult: Codable {
         case geojson
         case location
         case time_observed_at
+        case id
     }
 }
 
@@ -82,7 +84,7 @@ struct ObservationCoordinate: Codable {
     let coordinates: [Double]
 }
 
-/// Search autocomplete results
+// MARK: - Species Search Response
 struct TaxonSearchResult: Codable {
     let taxon_id: Int
     let common_name: String?
@@ -109,4 +111,66 @@ struct TaxonRecord: Codable {
 
 struct TaxonPhoto: Codable {
     let medium_url: String?
+}
+
+// MARK: - Observation Response
+struct ObservationResponse: Codable {
+    let total_results: Int
+    let results: [ObservationM]
+}
+
+struct ObservationM: Codable, Identifiable {
+    let id: Int
+    let uuid: String
+    let quality_grade: String
+    let time_observed_at: String?
+    let taxon: ObservationTaxon?
+    let user: ObservationUser
+    let photos: [ObservationPhoto]
+    let place_guess: String?
+    let location: String?
+    let observed_on: String?
+    let description: String?
+    let identifications_count: Int
+    let comments_count: Int
+    let faves_count: Int
+    let uri: String
+}
+
+struct ObservationTaxon: Codable {
+    let id: Int
+    let name: String
+    let rank: String
+    let preferred_common_name: String?
+    let iconic_taxon_name: String?
+    let wikipedia_url: String?
+    let wikipedia_summary: String?
+    let default_photo: ObservationDefaultPhoto?
+    let observations_count: Int
+}
+
+struct ObservationDefaultPhoto: Codable {
+    let id: Int?
+    let url: String?
+    let attribution: String?
+}
+
+struct ObservationPhoto: Codable, Identifiable {
+    let id: Int
+    let license_code: String?
+    let url: String?
+    let attribution: String?
+    let original_dimensions: PhotoDimensions?
+}
+
+struct PhotoDimensions: Codable {
+    let width: Int
+    let height: Int
+}
+
+struct ObservationUser: Codable {
+    let id: Int
+    let login: String
+    let name: String?
+    let icon_url: String?
 }

@@ -10,14 +10,21 @@ import SwiftUI
 struct MainAppView: View {
     @Environment(ViewsManager.self) var viewManager
     @State var searchManager = SearchManager()
+    @State var geminiManager = AIManager()
     var manageLocation: LocationManager
     
     var body: some View {
         tabs
             .tabBarMinimizeBehavior(.onScrollDown)
-            .tabViewBottomAccessory {
-                if viewManager.displayTabViewBottomAccessory {
-                    UserLocationView(manageLocation: manageLocation)
+            .task {
+                if geminiManager.FunFacts.count > 0 {
+                    print("Fun fact already filled")
+                } else {
+                    do {
+                        try await geminiManager.generateFunFact()
+                    } catch {
+                        print("Gemini failed: \(error)")
+                    }
                 }
             }
     }
@@ -29,6 +36,7 @@ struct MainAppView: View {
                     tab.view
                         .environment(viewManager)
                         .environment(manageLocation)
+                        .environment(geminiManager)
                 }
             }
             

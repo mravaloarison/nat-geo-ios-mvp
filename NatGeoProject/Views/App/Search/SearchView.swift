@@ -13,27 +13,40 @@ struct SearchView: View {
     
     var body: some View {
         NavigationStack {
-            HeaderLayout(tab: "Search")
-                .padding(.horizontal)
             listOfResults
-            .listStyle(.inset)
-            .searchable(
-                text: $searchManager.speciesSearchField,
-                prompt: "Look for species"
-            )
+                .listStyle(.inset)
+                .searchable(
+                    text: $searchManager.speciesSearchField,
+                    prompt: "Look for species"
+                )
+            
+                .searchScopes($searchManager.searchScope, activation: .onSearchPresentation) {
+                    Text("Normal Search")
+                        .tag(SearchScope.naturalLanguage)
+                        .padding()
+                    Text("Use Natural Language")
+                        .tag(SearchScope.naturalLanguage)
+                        .padding()
+                }
         }
         .onAppear {
-            viewManager.displayTabViewBottomAccessory = true
+            viewManager.displayTabViewBottomAccessory = false
         }
     }
     
     var listOfResults: some View {
         Group {
-            List(0..<searchManager.searchResults.count, id: \.self) { index in
-                NavigationLink {
-                    Text("Itme \(index + 1)")
-                } label: {
-                    ResultListView(taxon: searchManager.searchResults[index])
+            if searchManager.isSearching {
+                ProgressView()
+            } else if searchManager.searchResults.count == 0 {
+                Text("No result.")
+            } else {
+                List(0..<searchManager.searchResults.count, id: \.self) { index in
+                    NavigationLink {
+                        Text("Itme \(index + 1)")
+                    } label: {
+                        ResultListView(taxon: searchManager.searchResults[index])
+                    }
                 }
             }
         }

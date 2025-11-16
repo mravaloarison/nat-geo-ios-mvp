@@ -54,3 +54,39 @@ func formatToDec(_ decimal: Double?) -> String {
         return NumberFormatter.localizedString(from: NSNumber(value: decimal), number: .decimal)
     }
 }
+
+extension String {
+    func toPhotoSize(_ size: PhotoSize) -> String {
+        let sizes = ["square", "small", "medium", "large", "original"]
+        var result = self
+        
+        for oldSize in sizes {
+            if self.contains("/\(oldSize).") {
+                result = self.replacingOccurrences(of: "/\(oldSize).", with: "/\(size.rawValue).")
+                break
+            }
+        }
+        
+        return result
+    }
+    
+    var toOriginal: String {
+        toPhotoSize(.original)
+    }
+    
+    var toLarge: String {
+        toPhotoSize(.large)
+    }
+    
+    var toMedium: String {
+        toPhotoSize(.medium)
+    }
+}
+
+enum PhotoSize: String {
+    case square = "square"
+    case small = "small"
+    case medium = "medium"
+    case large = "large"
+    case original = "original"
+}

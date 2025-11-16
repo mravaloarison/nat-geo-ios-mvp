@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		61301ACC2EC552AC0002F984 /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 61301ACB2EC552AC0002F984 /* FirebaseAI */; };
+		61301ACE2EC552AC0002F984 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 61301ACD2EC552AC0002F984 /* FirebaseAuth */; };
+		61301AD02EC552AC0002F984 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 61301ACF2EC552AC0002F984 /* FirebaseCore */; };
+		61301AD22EC552AC0002F984 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 61301AD12EC552AC0002F984 /* FirebaseFirestore */; };
+		61301B122EC570AF0002F984 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 61301B112EC570AF0002F984 /* FirebaseAnalytics */; };
+		61301B142EC575780002F984 /* FirebaseAILogic in Frameworks */ = {isa = PBXBuildFile; productRef = 61301B132EC575780002F984 /* FirebaseAILogic */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		61CF06942EAFF89800B27CCB /* NatGeoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatGeoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,16 +32,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61301B142EC575780002F984 /* FirebaseAILogic in Frameworks */,
+				61301ACC2EC552AC0002F984 /* FirebaseAI in Frameworks */,
+				61301AD22EC552AC0002F984 /* FirebaseFirestore in Frameworks */,
+				61301AD02EC552AC0002F984 /* FirebaseCore in Frameworks */,
+				61301B122EC570AF0002F984 /* FirebaseAnalytics in Frameworks */,
+				61301ACE2EC552AC0002F984 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61301B102EC570AF0002F984 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		61CF068B2EAFF89800B27CCB = {
 			isa = PBXGroup;
 			children = (
 				61CF06962EAFF89800B27CCB /* NatGeoProject */,
+				61301B102EC570AF0002F984 /* Frameworks */,
 				61CF06952EAFF89800B27CCB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +88,12 @@
 			);
 			name = NatGeoProject;
 			packageProductDependencies = (
+				61301ACB2EC552AC0002F984 /* FirebaseAI */,
+				61301ACD2EC552AC0002F984 /* FirebaseAuth */,
+				61301ACF2EC552AC0002F984 /* FirebaseCore */,
+				61301AD12EC552AC0002F984 /* FirebaseFirestore */,
+				61301B112EC570AF0002F984 /* FirebaseAnalytics */,
+				61301B132EC575780002F984 /* FirebaseAILogic */,
 			);
 			productName = NatGeoProject;
 			productReference = 61CF06942EAFF89800B27CCB /* NatGeoProject.app */;
@@ -94,6 +123,9 @@
 			);
 			mainGroup = 61CF068B2EAFF89800B27CCB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 61CF06952EAFF89800B27CCB /* Products */;
 			projectDirPath = "";
@@ -334,6 +366,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		61301ACB2EC552AC0002F984 /* FirebaseAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAI;
+		};
+		61301ACD2EC552AC0002F984 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		61301ACF2EC552AC0002F984 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		61301AD12EC552AC0002F984 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		61301B112EC570AF0002F984 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		61301B132EC575780002F984 /* FirebaseAILogic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61301ACA2EC552AC0002F984 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAILogic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 61CF068C2EAFF89800B27CCB /* Project object */;
 }

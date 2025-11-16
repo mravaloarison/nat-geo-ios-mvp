@@ -31,7 +31,7 @@ struct ObservationListView: View {
                         showFilters: { showFiltersView = true }
                     )
                     .sheet(isPresented: $showFiltersView) {
-        //                ObservationFiltersView()
+                        // TODO: Filters View
                     }
             }
         }
@@ -55,7 +55,11 @@ struct ObservationListView: View {
             ForEach(0..<observations.count, id: \.self) { index in
                 LazyVStack {
                     NavigationLink {
-                        Text(observations[index].species_guess ?? "Unknown species")
+                        ObservationView(
+                            observationManager: ObservationManager(observations[index].id.flatMap {
+                                Int(exactly: $0)
+                            })
+                        )
                     } label: {
                         ObservationResultView(
                             observations: observations,
