@@ -53,22 +53,3 @@ struct QuizzCardView: View {
             .padding(.horizontal, 4)
     }
 }
-
-#Preview {
-    QuizzCardView(quiz: Quizzes(
-        speciesName: "Giant Panda",
-        imageUrl: "https://inaturalist-open-data.s3.amazonaws.com/photos/150277588/medium.jpg",
-        generatedQuizzes: [
-            GeneratedQuizz(
-                question: "What is the primary diet of a Giant Panda?",
-                arrayOfChoices: [
-                    .init(choice: "Bamboo", isCorrect: true),
-                    .init(choice: "Fish", isCorrect: false),
-                    .init(choice: "Small Mammals", isCorrect: false),
-                    .init(choice: "Berries", isCorrect: false)
-                ],
-                nextQuestion: 1
-            )
-        ]
-    ))
-}

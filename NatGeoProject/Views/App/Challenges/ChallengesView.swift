@@ -9,15 +9,25 @@ import SwiftUI
 
 struct ChallengesView: View {
     @Environment(ViewsManager.self) var viewManager
-    var quizzesManager: QuizzesManager
+    @Bindable var quizzesManager: QuizzesManager
     let columns = [GridItem(.adaptive(minimum: 120), spacing: 16)]
+    
+    @State var startedQuiz: Bool = false
+    @State var selectedQuizIndex: Int? = nil
 
     var body: some View {
-        NavigationStack {
+        VStack {
             HeaderLayout(tab: "Quizzes")
                 .padding(.horizontal)
             content
             Spacer()
+        }
+        .fullScreenCover(isPresented: $startedQuiz) {
+            QuizView(
+                quiz: $quizzesManager.quizzes[selectedQuizIndex ?? 0],
+                index: 0,
+                isQuizEnding: $startedQuiz
+            )
         }
         .onAppear {
             viewManager.displayTabViewBottomAccessory = false
@@ -32,7 +42,7 @@ struct ChallengesView: View {
                 Text(quizzesManager.error ?? "Something went wrong while trying to get quizzes")
             } else {
                 quizzes
-                .padding(.horizontal)
+                    .padding(.horizontal)
             }
         }
     }
@@ -40,9 +50,14 @@ struct ChallengesView: View {
     var quizzes: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
-                ForEach(quizzesManager.quizzes, id:\.self) { quizz in
-                    QuizzCardView(quiz: quizz)
-                        .aspectRatio(1, contentMode: .fit)
+                ForEach(Array(quizzesManager.quizzes.enumerated()), id: \.offset) { index, quiz in
+                    Button {
+                        selectedQuizIndex = index
+                        startedQuiz = true
+                    } label: {
+                        QuizzCardView(quiz: quiz)
+                            .aspectRatio(1, contentMode: .fit)
+                    }
                 }
             }
         }
