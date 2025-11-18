@@ -14,36 +14,43 @@ struct QuizzCardView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 4) {
-                AsyncImage(url: URL(string: quiz.imageUrl)) { phase in
-                    if let image = phase.image {
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .aspectRatio(imageAspectRatio, contentMode: .fit)
-                    } else if phase.error != nil {
-                        Color.red.opacity(0.2)
-                            .aspectRatio(imageAspectRatio, contentMode: .fit)
-                    } else {
-                        ProgressView()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .aspectRatio(imageAspectRatio, contentMode: .fit)
-                    }
-                }
-                .frame(width: geometry.size.width)
-                .clipped()
-                .cornerRadius(12)
-                Text(quiz.speciesName)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.primary)
-                    .lineLimit(1)
-                    .padding(.horizontal, 4)
+                img
+                    .frame(width: geometry.size.width)
+                    .clipped()
+                    .cornerRadius(12)
+                speciesName
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background(Color(.systemBackground))
             .cornerRadius(12)
         }
-//        .aspectRatio(1 / (imageAspectRatio + 0.5), contentMode: .fit)
+    }
+    
+    var img: some View {
+        AsyncImage(url: URL(string: quiz.imageUrl)) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .aspectRatio(imageAspectRatio, contentMode: .fit)
+            } else if phase.error != nil {
+                Color.red.opacity(0.2)
+                    .aspectRatio(imageAspectRatio, contentMode: .fit)
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .aspectRatio(imageAspectRatio, contentMode: .fit)
+            }
+        }
+    }
+    
+    var speciesName: some View {
+        Text(quiz.speciesName)
+            .font(.subheadline)
+            .fontWeight(.medium)
+            .foregroundColor(.primary)
+            .lineLimit(1)
+            .padding(.horizontal, 4)
     }
 }
 
