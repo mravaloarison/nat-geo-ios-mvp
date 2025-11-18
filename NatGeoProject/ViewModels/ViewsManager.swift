@@ -21,14 +21,9 @@ import Foundation
             view: AnyView(ExploreView())
         ),
         TabItem(
-            icon: "sparkles.2",
-            label: "AI Guide",
-            view: AnyView(AIView())
-        ),
-        TabItem(
             icon: "puzzlepiece.extension",
-            label: " Challenges",
-            view: AnyView(ChallengesView())
+            label: "Quizzes",
+            view: AnyView(ChallengesView(quizzesManager: QuizzesManager()))
         )
     ]
     
