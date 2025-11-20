@@ -10,7 +10,7 @@ import SwiftUI
 struct ExploreView: View {
     @Environment(ViewsManager.self) var viewManager
     @Environment(LocationManager.self) var manageLocation
-    @State var exploreManager = ExploreManager()
+    var exploreManager: ExploreManager
     
     @State private var showListView = false
     @State private var showFiltersView = false
@@ -20,9 +20,6 @@ struct ExploreView: View {
             locationAuthorizedView
                 .onAppear {
                     viewManager.displayTabViewBottomAccessory = true
-                }
-                .task {
-                    await exploreManager.getData()
                 }
         } else {
             NoMapsView()
@@ -58,7 +55,7 @@ struct ExploreView: View {
 }
 
 #Preview {
-    ExploreView()
+    ExploreView(exploreManager: ExploreManager())
         .environment(ViewsManager())
         .environment(LocationManager())
 }

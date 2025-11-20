@@ -11,10 +11,10 @@ struct FunFactHorizontalListView: View {
     let funfacts: [FunFact]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading) {
             Text("Did You Know?")
                 .font(.title2.bold())
-                .padding(.horizontal)
+                .padding()
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 16) {
@@ -31,6 +31,7 @@ struct FunFactHorizontalListView: View {
                 .padding(.horizontal)
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -13,12 +13,17 @@ import Foundation
         TabItem(
             icon: "house",
             label: "Home",
-            view: AnyView(HomeView())
+            view: AnyView(HomeView(newsManager: NewsManager()))
         ),
         TabItem(
             icon: "rectangle.and.text.magnifyingglass",
             label: "Explore",
-            view: AnyView(ExploreView())
+            view: AnyView(ExploreView(exploreManager: ExploreManager()))
+        ),
+        TabItem(
+            icon: "heart",
+            label: "Favorites",
+            view: AnyView(FavoritesView())
         ),
         TabItem(
             icon: "puzzlepiece.extension",

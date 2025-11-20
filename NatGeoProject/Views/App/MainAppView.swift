@@ -41,7 +41,7 @@ struct MainAppView: View {
             }
             
             Tab(role: .search) {
-                SearchView(searchManager: $searchManager)
+                SearchView(searchManager: searchManager)
                     .environment(viewManager)
             }
         }

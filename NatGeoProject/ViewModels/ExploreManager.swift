@@ -23,6 +23,14 @@ import MapKit
         "https://api.inaturalist.org/v1/observations?verifiable=true&page=\(pageNumber)&lat=\(lat)&lng=\(lng)&radius=10"
     }
     
+    init(autoGenerate: Bool = true) {
+        if autoGenerate {
+            Task {
+                await getData()
+            }
+        }
+    }
+    
     func getData() async {
         isLoadingSpecies = true
         defer { isLoadingSpecies = false }

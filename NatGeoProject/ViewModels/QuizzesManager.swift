@@ -28,97 +28,17 @@ struct Quizzes: Codable, Hashable {
 
 @MainActor
 @Observable class QuizzesManager {
-    var quizzes: [Quizzes] = [
-        Quizzes(
-            speciesName: "Giant Panda",
-            imageUrl: "https://inaturalist-open-data.s3.amazonaws.com/photos/150277588/medium.jpg",
-            generatedQuizzes: [
-                GeneratedQuizz(
-                    question: "What is the primary diet of a Giant Panda?",
-                    arrayOfChoices: [
-                        GeneratedChoice(choice: "Bamboo", isCorrect: true),
-                        GeneratedChoice(choice: "Fish", isCorrect: false),
-                        GeneratedChoice(choice: "Small Mammals", isCorrect: false),
-                        GeneratedChoice(choice: "Berries", isCorrect: false)
-                    ],
-                    selected: nil,
-                    nextQuestion: 1
-                ),
-                GeneratedQuizz(
-                    question: "Where are Giant Pandas primarily found in the wild?",
-                    arrayOfChoices: [
-                        GeneratedChoice(choice: "Central China", isCorrect: true),
-                        GeneratedChoice(choice: "Amazon Rainforest", isCorrect: false),
-                        GeneratedChoice(choice: "African Savanna", isCorrect: false),
-                        GeneratedChoice(choice: "Arctic Tundra", isCorrect: false)
-                    ],
-                    selected: nil,
-                    nextQuestion: 2
-                ),
-                GeneratedQuizz(
-                    question: "What is the conservation status of the Giant Panda?",
-                    arrayOfChoices: [
-                        GeneratedChoice(choice: "Vulnerable", isCorrect: true),
-                        GeneratedChoice(choice: "Extinct", isCorrect: false),
-                        GeneratedChoice(choice: "Least Concern", isCorrect: false),
-                        GeneratedChoice(choice: "Critically Endangered", isCorrect: false)
-                    ],
-                    selected: nil,
-                    nextQuestion: 3
-                ),
-                GeneratedQuizz(
-                    question: "How often do female Giant Pandas typically reproduce?",
-                    arrayOfChoices: [
-                        GeneratedChoice(choice: "Every 2-3 years", isCorrect: true),
-                        GeneratedChoice(choice: "Every year", isCorrect: false),
-                        GeneratedChoice(choice: "Only once in their lifetime", isCorrect: false),
-                        GeneratedChoice(choice: "Every 5-7 years", isCorrect: false)
-                    ],
-                    selected: nil,
-                    nextQuestion: 4
-                ),
-                GeneratedQuizz(
-                    question: "What is a newborn Giant Panda cub often compared to in size?",
-                    arrayOfChoices: [
-                        GeneratedChoice(choice: "A stick of butter", isCorrect: true),
-                        GeneratedChoice(choice: "A small dog", isCorrect: false),
-                        GeneratedChoice(choice: "A human baby", isCorrect: false),
-                        GeneratedChoice(choice: "A football", isCorrect: false)
-                    ],
-                    selected: nil,
-                    nextQuestion: nil
-                )
-            ]
-        ),
-
-        Quizzes(
-            speciesName: "Oak Tree",
-            imageUrl: "https://inaturalist-open-data.s3.amazonaws.com/photos/90880312/medium.jpg",
-            generatedQuizzes: []
-        ),
-
-        Quizzes(
-            speciesName: "Blue Whale",
-            imageUrl: "https://static.inaturalist.org/photos/194385336/medium.jpg",
-            generatedQuizzes: []
-        ),
-
-        Quizzes(
-            speciesName: "Sunflower",
-            imageUrl: "https://inaturalist-open-data.s3.amazonaws.com/photos/10802854/medium.jpg",
-            generatedQuizzes: []
-        )
-    ]
+    var quizzes: [Quizzes] = []
     
     var isGeneratingQuizzes = false
     var error: String? = nil
     
-//    init(autoGenerate: Bool = true) {
-//        if autoGenerate {
-//            loadQuizzes()
-//        }
-//    }
-//    
+    init(autoGenerate: Bool = true) {
+        if autoGenerate {
+            loadQuizzes()
+        }
+    }
+    
     func loadQuizzes() {
         Task { [weak self] in
             guard let self else { return }

@@ -26,27 +26,40 @@ struct ObservationResultView: View {
         VStack(alignment: .leading) {
             speciesName
             observerName
+            Spacer(minLength: 4)
+            
             timeFrame
         }
+        .frame(maxHeight: .infinity)
     }
     
     var speciesName: some View {
-        HStack {
-            Text(item.species_guess ?? item.taxon?.name ?? "Unknown species")
-                .bold()
-            Spacer()
-            Text(item.relativeTime ?? "")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            HStack(alignment: .lastTextBaseline) {
+                Text(item.species_guess ?? item.taxon?.name ?? "Unknown species")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .lineLimit(1)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                Text(item.relativeTime ?? "")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
         }
-    }
     
     var observerName: some View {
         Text("By \(item.user?.name ?? item.user?.login ?? "Unknown user")")
+            .font(.subheadline)
+            .fontWeight(.medium)
+            .foregroundColor(.secondary)
+            .lineLimit(1)
     }
     
     var timeFrame: some View {
         Text(item.resolvedAddress ?? item.location ?? "No precise location")
+            .font(.footnote)
             .lineLimit(2)
             .foregroundColor(.secondary)
     }

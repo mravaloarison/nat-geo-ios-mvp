@@ -1,59 +1,60 @@
 //
-//  SearchView.swift
-//  NatGeoProject
+//  SearchView.swift
+//  NatGeoProject
 //
-//  Created by Mami RavaLoarison on 10/27/25.
+//  Created by Mami RavaLoarison on 10/27/25.
 //
 
 import SwiftUI
 
+enum NewSearchScope: String, CaseIterable {
+    case species = "by Species"
+    case locations = "by Locations"
+    case nl = "using AI"
+}
+
 struct SearchView: View {
     @Environment(ViewsManager.self) var viewManager
-    @Binding var searchManager: SearchManager
+    @Bindable var searchManager: SearchManager
+    
+    @State private var selectedScope: NewSearchScope = .species
     
     var body: some View {
         NavigationStack {
-            listOfResults
-                .listStyle(.inset)
-                .searchable(
-                    text: $searchManager.speciesSearchField,
-                    prompt: "Look for species"
-                )
-            
-                .searchScopes($searchManager.searchScope, activation: .onSearchPresentation) {
-                    Text("Normal Search")
-                        .tag(SearchScope.naturalLanguage)
-                        .padding()
-                    Text("Use Natural Language")
-                        .tag(SearchScope.naturalLanguage)
-                        .padding()
-                }
+            if searchManager.speciesSearchField.isEmpty {
+                ContentUnavailableView.search
+            } else {
+                searchContent
+            }
+        }
+        .searchable(
+            text: $searchManager.speciesSearchField,
+            prompt: "Start typing"
+        )
+        .searchScopes($selectedScope, activation: .onSearchPresentation) {
+            ForEach(NewSearchScope.allCases, id: \.self) { scope in
+                Text(scope.rawValue).tag(scope)
+            }
         }
         .onAppear {
             viewManager.displayTabViewBottomAccessory = false
         }
     }
     
-    var listOfResults: some View {
-        Group {
-            if searchManager.isSearching {
-                ProgressView()
-            } else if searchManager.searchResults.count == 0 {
-                Text("No result.")
-            } else {
-                List(0..<searchManager.searchResults.count, id: \.self) { index in
-                    NavigationLink {
-                        Text("Itme \(index + 1)")
-                    } label: {
-                        ResultListView(taxon: searchManager.searchResults[index])
-                    }
-                }
-            }
+    @ViewBuilder
+    var searchContent: some View {
+        switch selectedScope {
+        case .species:
+            Text("Searching **\(searchManager.speciesSearchField)** for **Species**")
+        case .locations:
+            Text("Searching **\(searchManager.speciesSearchField)** for **Locations**")
+        case .nl:
+            Text("Searching for **\(searchManager.speciesSearchField)** using **Artificial Intelligence**")
         }
     }
 }
 
 #Preview {
-    SearchView(searchManager: .constant(SearchManager()))
+    SearchView(searchManager: SearchManager())
         .environment(ViewsManager())
 }
