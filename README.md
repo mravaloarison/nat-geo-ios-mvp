@@ -1,4 +1,4 @@
-# Discover Nature
+# Discover Nature - iOS MVP
 
 [![Project Proposal](https://img.shields.io/badge/View-Project_Proposal-3fa66e?style=for-the-badge)](https://mravaloarison.github.io/discover-nature-proposal/)
 [![Python API](https://img.shields.io/badge/Flask_API-Github_Repository-2D8659?style=for-the-badge&logo=flask)](https://github.com/mravaloarison/nat-geo-api-mvp)
